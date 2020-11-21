@@ -2,9 +2,9 @@
 
 ## Leitura
 
-* Na pasta Artigos, vamos manter apenas artigos externos que possam contribuir com o projeto
+* Na pasta RefBibliograficas, vamos manter apenas artigos externos que possam contribuir com o projeto
 * Lá também está o artigo que levava ao MDMTSP - com drones - como eu não entendi muito bem ainda os requisitos do projeto e, como acredito que não seja só rodar a heurística, dexei lá esse arquivo, para caso queiramos aplicar o problema.
-* Além da pasta Artigos, recomendo a leitura da pasta Proj/LKH-*/DOC - principalmente do guia do usuário, de início
+* Além da pasta RefBibliograficas, recomendo a leitura da pasta Proj/LKH-*/DOC - principalmente do guia do usuário, de início
 
 ## Dados 
 
