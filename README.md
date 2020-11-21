@@ -12,3 +12,15 @@
 * Para rodar a heurística num conjunto de dados, é preciso criar um arquivo .par com os parãmetros para rodar
 * Conforme a documentação, os parâmetros default são os melhores na maior parte das vezes
 * Os valores ótimos para cada problema do link dado pelo prof estão nesse link : http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/ATSP.html
+
+
+
+## E-mail do professor - resumido
+
+Não entendi se no fim vcs pretendem resolver o MDMTSP ou o ATSP (e usar a transformação para o MDMTSP). Os dois são problemas interessantes de serem abordados. Se forem resolver o ATSP eu sugiro usar alguma base de dados clássica ao invés de gerar aleatóriamente:
+
+http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/
+
+http://www.math.uwaterloo.ca/tsp/data/index.html
+
+Além disso, gostaria que vcs definissem qual modelo matemático/solver e metaheurística irão utilizar para resolver o problema.
