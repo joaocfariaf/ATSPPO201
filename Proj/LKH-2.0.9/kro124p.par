@@ -1,4 +1,0 @@
-PROBLEM_FILE = kro124p.atsp
-OPTIMUM = 36230
-
-TOUR_FILE = kro124p.tour
