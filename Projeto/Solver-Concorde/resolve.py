@@ -1,6 +1,7 @@
 from itertools import combinations, product
 import os as os
 
+
 def tsplib(content):
     idx = content.index('DIMENSION:') + 1
     n = int(content[idx])
@@ -24,8 +25,9 @@ def tsplib(content):
     # _atsp = atsp.SA(data, initial_fitness=f, infinity=inf, regularization_bound=r, learning_plot=learning_plot)
     # return _atsp.solve()
 
+
 # Retorna a distância entre as cidades 1 e 2 - basta pegar na posição
-def TSPdistance(distanceMatrix, city1, city2, cheap = -1):
+def TSPdistance(distanceMatrix, city1, city2, cheap=-1):
     ATSPsize = len(distanceMatrix)
     if (abs(city1 - city2) == ATSPsize):
         return cheap
@@ -34,7 +36,8 @@ def TSPdistance(distanceMatrix, city1, city2, cheap = -1):
     elif (city2 >= ATSPsize and city1 < ATSPsize):
         return distanceMatrix[city2 - ATSPsize][city1]
     else:
-        return 99999
+        return 9999
+
 
 for file in os.listdir("../Exemplos"):
     filex = "../Exemplos/" + file
@@ -50,17 +53,18 @@ for file in os.listdir("../Exemplos"):
         dist = {}
         for c1, c2 in product(capitals, capitals):
             d = TSPdistance(data, c1, c2)
-            if (c1 != c2):
+            if c1 != c2:
                 dist[(c1, c2)] = d
 
         tspFile = "ConvertedToTSP/" + file.split('.')[0] + ".tsp"
         f = open(tspFile, "w")
-        f.write("NAME:%6s" % file.split('.')[0]+" \nTYPE: TSP\nCOMMENT: NO_COMMENT\n")
+        f.write("NAME:%6s" % file.split('.')[0] + " \nTYPE: TSP\nCOMMENT: NO_COMMENT\n")
         f.close()
         f = open(tspFile, "a")
         f.write("DIMENSION:")
         f.write('%4s' % str(TSPdimension))
-        f.write("\nEDGE_WEIGHT_TYPE: EXPLICIT\nEDGE_WEIGHT_FORMAT: FULL_MATRIX\nDISPLAY_DATA_TYPE: NO_DISPLAY\nEDGE_WEIGHT_SECTION\n")
+        f.write("\nEDGE_WEIGHT_TYPE: EXPLICIT\nEDGE_WEIGHT_FORMAT: FULL_MATRIX\nDISPLAY_DATA_TYPE: "
+                "NO_DISPLAY\nEDGE_WEIGHT_SECTION\n")
         for i in range(TSPdimension):
             for k in range(TSPdimension):
                 f.write('%6s' % str(TSPdistance(data, i, k)))
@@ -69,4 +73,24 @@ for file in os.listdir("../Exemplos"):
         f.write("EOF")
         f.close()
         # Roda o concorde e guarda a solução apenas num lugar específico
-        os.system("./concorde -x -o Sols/" + file.split('.')[0] + "sol " + tspFile)
+        solFile = "Sols/" + file.split('.')[0] + ".sol"
+        os.system("./concorde -x -o " + solFile + " " + tspFile)
+
+        sol = open(solFile, "r")
+        sol_content = sol.read().split()
+        correction = int(int(sol_content[0]) / 2)
+        realTour = []
+        cost = 0
+        for i in range(TSPdimension):
+            cost += dist[(int(sol_content[i + 1]), int(sol_content[(i + 1) % TSPdimension + 1]))]
+            if i % 2 == 0:
+                realTour.append(int(sol_content[i + 1]))
+        cost = cost + correction
+        sol.close()
+        sol = open(solFile, "w")
+        sol.write(str(cost))
+        sol.write("\n")
+        sol.write(str(realTour))
+        sol.close()
+
+        print("\n##################################################################################################\n")
